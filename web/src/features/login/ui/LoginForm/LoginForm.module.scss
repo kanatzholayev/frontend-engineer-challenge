@@ -3,10 +3,16 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
     width: 400px;
+    gap: 24px;
 }
 
 .title {
     @include typography.h1;
+}
+
+.serverError {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-invalid);
 }

@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
 }
 
 
@@ -13,7 +13,7 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
@@ -27,7 +27,7 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
@@ -41,7 +41,7 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
@@ -55,7 +55,7 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
@@ -69,12 +69,12 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
   :global(.logo-5) {
-    animation: animate-svg-fill-5 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.2000000000000002s both;
+    animation: animate-svg-fill-5 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.2s both;
   }
   
   @keyframes animate-svg-fill-6 {
@@ -83,7 +83,7 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
@@ -97,12 +97,12 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
   :global(.logo-7) {
-    animation: animate-svg-fill-7 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.4000000000000001s both;
+    animation: animate-svg-fill-7 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.4s both;
   }
   
   @keyframes animate-svg-fill-8 {
@@ -111,7 +111,7 @@
     }
   
     100% {
-      fill: rgb(1, 2, 3);
+      fill: rgb(1 2 3);
     }
   }
   
@@ -139,11 +139,11 @@
     }
   
     100% {
-      fill: rgb(255, 255, 255);
+      fill: rgb(255 255 255);
     }
   }
   
   :global(.logo-10) {
-    animation: animate-svg-fill-10 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.7000000000000002s both;
+    animation: animate-svg-fill-10 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.7s both;
   }
   

@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -12,6 +14,7 @@ import (
 
 	"github.com/Aidajy111/engineer-challenge/internal/app"
 	"github.com/Aidajy111/engineer-challenge/internal/infra/db/postgres"
+	"github.com/Aidajy111/engineer-challenge/internal/transport/httpserver"
 	"github.com/Aidajy111/engineer-challenge/pkg/jwt"
 	"github.com/jmoiron/sqlx"
 	"google.golang.org/grpc"
@@ -37,6 +40,12 @@ func main() {
 	if port == "" {
 		port = "5555"
 	}
+
+	httpPort := os.Getenv("HTTP_PORT")
+	if httpPort == "" {
+		httpPort = "8080"
+	}
+	corsOrigin := os.Getenv("CORS_ALLOWED_ORIGIN")
 
 	// Подключение к БД
 	db, err := sqlx.Connect("postgres", dsn)
@@ -83,7 +92,26 @@ func main() {
 		}
 	}()
 
+	httpSrv := &http.Server{
+		Addr:              ":" + httpPort,
+		Handler:           httpserver.New(authService, corsOrigin).Handler(),
+		ReadHeaderTimeout: 5 * time.Second,
+	}
+	go func() {
+		log.Printf("HTTP JSON API listening on :%s\n", httpPort)
+		if err := httpSrv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Printf("http server: %v", err)
+		}
+	}()
+
 	<-stop
+
+	log.Println("Shutting down HTTP server...")
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer shutdownCancel()
+	if err := httpSrv.Shutdown(shutdownCtx); err != nil {
+		log.Printf("http shutdown: %v", err)
+	}
 
 	log.Println("Shutting down gRPC server...")
 	s.GracefulStop()

@@ -3,24 +3,30 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
     width: 400px;
+    gap: 24px;
 }
 
 .title {
     @include typography.h1;
 }
 
+.serverError {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-invalid);
+}
+
 .agreement {
     font-family: var(--main-font-family), sans-serif;
-    font-weight: 400;
     font-size: 12px;
+    font-weight: 400;
     line-height: 140%;
     text-align: center;
     color: var(--color-disabled) !important;
 }
 
 .agreementLink {
-    text-decoration: underline;
     color: var(--color-disabled) !important;
+    text-decoration: underline;
 }

@@ -45,19 +45,20 @@ docker compose up
 Что при этом поднимается:
 
 - `db` – контейнер с PostgreSQL `15-alpine`
-- `auth-service` – gRPC-сервис аутентификации на порту `5555`
+- `auth-service` – gRPC на порту `5555` и **JSON HTTP API** для браузера на порту `8080`
 
 При старте сервис:
 
 1. Подключается к PostgreSQL.
 2. Прогоняет миграции из `./migrations`.
-3. Запускает gRPC‑сервер на `:5555`.
+3. Запускает gRPC‑сервер на `:5555` и HTTP JSON API на `:8080`.
 
 Ожидаемые строки:
 
 - `Running database migrations...`
 - `Migrations applied successfully or already up to date`
 - `gRPC Server listening on :5555`
+- `HTTP JSON API listening on :8080`
 
 ### Вариант 2: Локальный запуск без Docker
 
@@ -81,6 +82,37 @@ docker compose up
 ```bash
 go run ./cmd/auth-service/main.go
 ```
+
+---
+
+## HTTP JSON API (фронтенд)
+
+Параллельно с gRPC поднимается REST‑совместимый слой (`internal/transport/httpserver`): те же сценарии, тело запросов в **camelCase**, ответы — JSON.
+
+| Метод | Путь | Тело (пример) |
+|--------|------|----------------|
+| `POST` | `/api/v1/register` | `{"email","password","displayName"}` → `{"userId"}` |
+| `POST` | `/api/v1/login` | `{"email","password"}` → `{"accessToken","refreshToken"}` |
+| `POST` | `/api/v1/forgot-password` | `{"email"}` → `{"success": true}` |
+| `POST` | `/api/v1/reset-password` | `{"token","newPassword"}` → `{"success": true}` |
+
+Ошибки: JSON `{"message":"..."}` и HTTP‑код (`400`, `401`, `409`, `500`).
+
+Переменные окружения сервиса:
+
+- `HTTP_PORT` — порт HTTP (по умолчанию `8080`).
+- `CORS_ALLOWED_ORIGIN` — значение `Access-Control-Allow-Origin` (по умолчанию `http://localhost:5174` под Vite в `web/`).
+- `FRONTEND_RESET_URL` — префикс ссылки сброса в логе `[EMAIL STUB]` (по умолчанию `http://localhost:5174/reset-password?token=`).
+
+### Фронтенд (`web/`)
+
+```bash
+cd web && npm install && npm run dev
+```
+
+В dev [`web/vite.config.ts`](web/vite.config.ts) проксирует `/api` → `http://localhost:8080`, поэтому клиенту достаточно базового URL `/api` (см. [`web/.env.example`](web/.env.example): опционально `VITE_API_BASE_URL` для продакшена).
+
+Стек UI: **TanStack Query**, **Axios**, **react-hook-form**, **Zod**.
 
 ---
 
@@ -130,7 +162,7 @@ go run ./cmd/auth-service/main.go
 
 Токен сброса попадает в лог сервиса в виде ссылки:
 
-`[EMAIL STUB] To: test@example.com | Reset Link: http://localhost:5555/reset?token=...`
+`[EMAIL STUB] To: test@example.com | Reset Link: http://localhost:5174/reset-password?token=...` (база задаётся `FRONTEND_RESET_URL`)
 
 **ResetPassword**
 

@@ -5,6 +5,8 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"errors"
+	"log"
+	"os"
 	"time"
 
 	"github.com/Aidajy111/engineer-challenge/internal/domain"
@@ -25,5 +27,13 @@ func (s *AuthService) ForgotPassword(ctx context.Context, email string) error {
 	}
 	token := hex.EncodeToString(b)
 	expires := time.Now().Add(time.Hour)
-	return s.repo.SetResetToken(ctx, email, token, expires)
+	if err := s.repo.SetResetToken(ctx, email, token, expires); err != nil {
+		return err
+	}
+	resetBase := os.Getenv("FRONTEND_RESET_URL")
+	if resetBase == "" {
+		resetBase = "http://localhost:5174/reset-password?token="
+	}
+	log.Printf("[EMAIL STUB] To: %s | Reset Link: %s%s\n", email, resetBase, token)
+	return nil
 }
