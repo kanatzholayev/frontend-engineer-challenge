@@ -6,9 +6,9 @@ export const LoginForm = () => (
   <div className={styles.container}>
     <h1 className={styles.title}>Войти в систему</h1>
 
-    <Input placeholder="Email" />
+    <Input placeholder="Email" label="Email" />
 
-    <Input placeholder="Password" />
+    <Input placeholder="Password" label="Password" />
 
     <Button>Login</Button>
   </div>
