@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider as AppRouter } from 'react-router-dom';
 
-import { LoginPage } from '@/pages';
+import { LoginPage, ResetPasswordPage } from '@/pages';
 
 import { BaseLayout } from '../layouts';
 
@@ -12,6 +12,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginPage />,
+      },
+      {
+        path: '/reset-password',
+        element: <ResetPasswordPage />,
       },
     ],
   },
