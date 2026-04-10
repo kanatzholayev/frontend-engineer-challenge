@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { IMAGES } from '@/shared/assets';
-import { Button } from '@/shared/ui';
+import { Button, FullscreenLoader } from '@/shared/ui';
 import { LoginForm } from '@/features/login';
 import { RegisterForm } from '@/features/register';
 
@@ -9,6 +9,17 @@ import styles from './LoginPage.module.scss';
 
 export const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
+  if (isLoading) {
+    return <FullscreenLoader />;
+  }
 
   return (
     <div className={styles.container}>
