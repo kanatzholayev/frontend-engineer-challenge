@@ -1,10 +1,4 @@
-$color-text: #1f1f27;
-$color-secondary: #81869a;
-$color-accent: #31a0f0;
-$color-invalid: #d23939;
-$border-default: rgb(31 31 39 / 0.08);
-$border-hover: rgb(31 31 39 / 0.16);
-$disabled-bg: rgb(31 31 39 / 0.05);
+@use '@/shared/styles/colors' as *;
 
 .wrapper {
   display: flex;
@@ -20,12 +14,12 @@ $disabled-bg: rgb(31 31 39 / 0.05);
   box-sizing: border-box;
   min-height: 56px;
   padding: 8px 0;
-  border-bottom: 1px solid $border-default;
+  border-bottom: 1px solid $color-stroke-subtle;
   transition: border-color 0.15s ease;
 
   &:has(input:disabled) {
-    background-color: $disabled-bg;
-    border-color: $border-default;
+    background-color: $color-surface-disabled;
+    border-color: $color-stroke-subtle;
   }
 
   &:focus-within:not(.error) {
@@ -41,7 +35,7 @@ $disabled-bg: rgb(31 31 39 / 0.05);
   }
 
   &:hover:not(:has(input:disabled), .error) {
-    border-color: $border-hover;
+    border-color: $color-stroke-muted;
   }
 
   &.floated {

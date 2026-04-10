@@ -6,10 +6,12 @@ export const LoginForm = () => (
   <div className={styles.container}>
     <h1 className={styles.title}>Войти в систему</h1>
 
-    <Input placeholder="Email" label="Email" />
+    <Input placeholder="Введите e-mail" label="Email" />
 
-    <Input placeholder="Password" label="Password" />
+    <Input placeholder="Введите пароль" label="Пароль" type="password" />
 
-    <Button>Login</Button>
+    <Button>Войти</Button>
+
+    <Button variant="tertiary">Забыли пароль?</Button>
   </div>
 );

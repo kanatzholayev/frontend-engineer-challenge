@@ -1,3 +1,5 @@
+@use '@/shared/styles/typography';
+
 .container {
     height: 100vh;
     width: 100vw;
@@ -13,10 +15,39 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 78px;
 }
 
 .logo {
     position: absolute;
     top: 16px;
     left: 20px;
+}
+
+.imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(129.57deg, #EBEFF4 0%, #E4EBF3 100%);
+}
+
+.footer {
+    @include typography.subtitle;
+
+    height: 78px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid #1F1F2714;
+    color: var(--color-secondary);
+}
+
+.registerButton {
+    padding: 5px;
 }

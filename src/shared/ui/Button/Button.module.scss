@@ -1,13 +1,4 @@
-$white: #fff;
-$text-primary: #1f1f27;
-$accent: #31a0f0;
-$accent-hover: #1990e5;
-$accent-press: #148adf;
-$disabled: #c0c2cb;
-$secondary-bg: rgb(49 160 240 / 0.1);
-$secondary-bg-hover: rgb(49 160 240 / 0.15);
-$secondary-bg-press: rgb(49 160 240 / 0.2);
-$secondary-bg-disabled: rgb(192 194 203 / 0.15);
+@use '@/shared/styles/colors' as *;
 
 .button {
   display: inline-flex;
@@ -27,7 +18,7 @@ $secondary-bg-disabled: rgb(192 194 203 / 0.15);
   }
 
   &:focus-visible {
-    outline: 2px solid $accent;
+    outline: 2px solid $color-accent;
     outline-offset: 2px;
   }
 }
@@ -72,21 +63,21 @@ $secondary-bg-disabled: rgb(192 194 203 / 0.15);
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  color: $white;
-  background-color: $accent;
+  color: $color-text-inverse;
+  background-color: $color-accent;
   border-radius: 8px;
 
   &:disabled {
-    color: $white;
-    background-color: $disabled;
+    color: $color-text-inverse;
+    background-color: $color-disabled;
   }
 
   &:hover:not(:disabled) {
-    background-color: $accent-hover;
+    background-color: $color-accent-hover;
   }
 
   &:active:not(:disabled) {
-    background-color: $accent-press;
+    background-color: $color-accent-press;
   }
 }
 
@@ -96,21 +87,21 @@ $secondary-bg-disabled: rgb(192 194 203 / 0.15);
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  color: $accent;
-  background-color: $secondary-bg;
+  color: $color-accent;
+  background-color: $color-accent-tint;
   border-radius: 8px;
 
   &:disabled {
-    color: $disabled;
-    background-color: $secondary-bg-disabled;
+    color: $color-disabled;
+    background-color: $color-accent-tint-disabled;
   }
 
   &:hover:not(:disabled) {
-    background-color: $secondary-bg-hover;
+    background-color: $color-accent-tint-hover;
   }
 
   &:active:not(:disabled) {
-    background-color: $secondary-bg-press;
+    background-color: $color-accent-tint-press;
   }
 }
 
@@ -120,20 +111,20 @@ $secondary-bg-disabled: rgb(192 194 203 / 0.15);
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  color: $accent;
+  color: $color-accent;
   background-color: transparent;
   border-radius: 8px;
 
   &:disabled {
-    color: $disabled;
+    color: $color-disabled;
   }
 
   &:hover:not(:disabled) {
-    color: $accent-hover;
+    color: $color-accent-hover;
   }
 
   &:active:not(:disabled) {
-    color: $accent-press;
+    color: $color-accent-press;
   }
 }
 
@@ -142,18 +133,18 @@ $secondary-bg-disabled: rgb(192 194 203 / 0.15);
   font-size: 20px;
   font-weight: 500;
   line-height: 1.2;
-  color: $text-primary;
+  color: $color-text;
   background-color: transparent;
 
   &:disabled {
-    color: $disabled;
+    color: $color-disabled;
   }
 
   &:hover:not(:disabled) {
-    color: $accent-hover;
+    color: $color-accent-hover;
   }
 
   &:active:not(:disabled) {
-    color: $accent-press;
+    color: $color-accent-press;
   }
 }
